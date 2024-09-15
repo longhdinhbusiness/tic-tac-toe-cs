@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import Board from "./Board";
+import React, { useState, useEffect } from 'react';
+import Board from './Board';
 
 function Game() {
   const [squares, setSquares] = useState(Array(9).fill(null));
@@ -8,7 +8,8 @@ function Game() {
 
   //Declaring a Winner
   useEffect(() => {
-    "Your code here";
+    const result = calculateWinner(squares);
+    setWinner(result);
   }, [squares]);
 
   //function to check if a player has won.
@@ -40,22 +41,28 @@ function Game() {
 
   //Handle player
   const handleClick = (i) => {
-    "Your code here";
+    if (squares[i] || winner) return;
+    const newSquares = squares.slice();
+    newSquares[i] = xIsNext ? 'X' : 'O';
+    setSquares(newSquares);
+    setXIsNext(!xIsNext);
   };
 
   //Restart game
-  const handlRestart = () => {
-    "Your code here";
+  const handleRestart = () => {
+    setSquares(Array(9).fill(null));
+    setXIsNext(true);
+    setWinner(null);
   };
 
   return (
     <div className="main">
-      <h2 className="result">Winner is: {winner ? winner : "N/N"}</h2>
+      <h2 className="result">Winner is: {winner ? winner : 'N/N'}</h2>
       <div className="game">
-        <span className="player">Next player is: {xIsNext ? "X" : "O"}</span>
-        <Board squares={"Your code here"} handleClick={"Your code here"} />
+        <span className="player">Next player is: {xIsNext ? 'X' : 'O'}</span>
+        <Board squares={squares} handleClick={handleClick} />
       </div>
-      <button onClick={"Your code here"} className="restart-btn">
+      <button onClick={handleRestart} className="restart-btn">
         Restart
       </button>
     </div>
