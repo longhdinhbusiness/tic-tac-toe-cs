@@ -1,9 +1,9 @@
 import React from 'react';
 
-function Square({ xIsNext, handleClick }) {
+function Square({ value, handleClick }) {
   return (
     <button className={'square'} onClick={handleClick}>
-      {null}
+      {value}
     </button>
   );
 }
