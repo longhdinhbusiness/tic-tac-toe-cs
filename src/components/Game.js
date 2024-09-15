@@ -6,12 +6,6 @@ function Game() {
   const [xIsNext, setXIsNext] = useState(true);
   const [winner, setWinner] = useState(null);
 
-  //Declaring a Winner
-  useEffect(() => {
-    const result = calculateWinner(squares);
-    setWinner(result);
-  }, [squares]);
-
   //function to check if a player has won.
   //If a player has won, we can display text such as “Winner: X” or “Winner: O”.
   //Input: squares: given an array of 9 squares:'X', 'O', or null.
@@ -39,6 +33,12 @@ function Game() {
     return null;
   };
 
+  //Declaring a Winner
+  useEffect(() => {
+    const result = calculateWinner(squares);
+    setWinner(result);
+  }, [squares]);
+
   //Handle player
   const handleClick = (i) => {
     if (squares[i] || winner) return;
@@ -57,7 +57,7 @@ function Game() {
 
   return (
     <div className="main">
-      <h2 className="result">Winner is: {winner ? winner : 'N/N'}</h2>
+      <h2 className="result">Winner is: {winner ? winner : '...'}</h2>
       <div className="game">
         <span className="player">Next player is: {xIsNext ? 'X' : 'O'}</span>
         <Board squares={squares} handleClick={handleClick} />
